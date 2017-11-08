@@ -30,6 +30,7 @@ var defaultEffect = {
   vignette: 0,
   lighten: 0,
   viewfinder: false,
+  viewfinderblend: 'multiply',
   sepia: false,
   gray: false,
   brightness: 0,
@@ -181,7 +182,7 @@ var applyEffect = function applyEffect(effect) {
 
       return (0, _utils.loadImageWithCache)(effect.viewfinder).then(function (img) {
         if (supportsBlendModes) {
-          ctx.globalCompositeOperation = 'multiply';
+          ctx.globalCompositeOperation = effect.viewfinderblend;
           ctx.drawImage(img, 0, 0, width, height);
         } else {
           var _createCanvasAndCtxFr = (0, _utils.createCanvasAndCtxFromImage)(img, width, height),

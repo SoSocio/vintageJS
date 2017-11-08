@@ -25,6 +25,7 @@ const defaultEffect: TEffect = {
   vignette: 0,
   lighten: 0,
   viewfinder: false,
+  viewfinderblend: 'multiply',
   sepia: false,
   gray: false,
   brightness: 0,
@@ -162,7 +163,7 @@ const applyEffect = (effect: TEffect) => {
 
       return loadImageWithCache(effect.viewfinder).then(img => {
         if (supportsBlendModes) {
-          ctx.globalCompositeOperation = 'multiply';
+          ctx.globalCompositeOperation = effect.viewfinderblend;
           ctx.drawImage(img, 0, 0, width, height);
         } else {
           const [_, vfCtx] = createCanvasAndCtxFromImage(img, width, height);
